@@ -16,8 +16,8 @@ public class LogisticaVista extends JFrame {
     private JTable tblEnvios;
     private JPanel pnlEditarEnvio, pnlEliminarEnvio;
 
-    private JTextField txtCodigo, txtCliente, txtPeso, txtDistancia;
-    private JComboBox cmbTipo, cmbEnvio;
+    private JTextField txtCodigo, txtCliente, txtPeso, txtDistancia, txtCodigoEliminar;
+    private JComboBox cmbTipo;
     private JLabel lblDistancia;
 
     private JTabbedPane tp;
@@ -131,14 +131,15 @@ public class LogisticaVista extends JFrame {
         pnlEliminarEnvio.setPreferredSize(new Dimension(pnlEliminarEnvio.getWidth(), 100));
         pnlEliminarEnvio.setLayout(null);
 
-        JLabel lblEnvio = new JLabel("Envío");
-        lblEnvio.setBounds(10, 10, 100, 25);
-        pnlEliminarEnvio.add(lblEnvio);
+        JLabel lblCodigoEliminar = new JLabel("Codigo a eliminar");
+        lblCodigoEliminar.setBounds(10, 10, 100, 25);
+        pnlEliminarEnvio.add(lblCodigoEliminar);
 
-        cmbEnvio = new JComboBox<>();                                                                 ////revisar y colocar busqueda
-        cmbEnvio.setBounds(110, 10, 400, 25);
-        pnlEliminarEnvio.add(cmbEnvio);
+        txtCodigoEliminar = new JTextField();
+        txtCodigoEliminar.setBounds(110, 10, 200, 25);
+        pnlEliminarEnvio.add(txtCodigoEliminar);
 
+        
         btnEliminarEnvio = new JButton("Eliminar");
         btnEliminarEnvio.setBounds(220, 70, 100, 25);
         pnlEliminarEnvio.add(btnEliminarEnvio);
@@ -197,6 +198,9 @@ public class LogisticaVista extends JFrame {
         return tblEnvios.getSelectedRow();
     }
 
+    public String getCodigoEliminar() {
+        return txtCodigoEliminar.getText().trim();
+    }
     
     // setters
     public void setGuardarEnvioClick(ActionListener escuchadorEvento) {
@@ -207,21 +211,24 @@ public class LogisticaVista extends JFrame {
         btnEliminar.addActionListener(escuchadorEvento);
     }
 
-    public void setEnvio(String informacionCuenta) {
-        cmbEnvio.addItem(informacionCuenta);
-    }
+    
 
     public void setEliminarClick(ActionListener escuchadorEvento) {
         btnEliminarEnvio.addActionListener(escuchadorEvento);
     }
 
+
+    public void setAbrirEliminarBarraClick(ActionListener escuchador) {
+        btnEliminar.addActionListener(escuchador);
+    }
     
     public void mostrarEnvios(String[][] datos, String[] encabezados) {
         DefaultTableModel dtm = new DefaultTableModel(datos, encabezados);
         tblEnvios.setModel(dtm);
     }
 
-    
+     
+
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
@@ -230,13 +237,7 @@ public class LogisticaVista extends JFrame {
         return JOptionPane.showConfirmDialog(null, mensaje, "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
-    public boolean quitarEnvio(int posicion) {
-        if (posicion >= 0 && posicion < cmbEnvio.getItemCount()) {
-            cmbEnvio.removeItemAt(posicion);
-            return true;
-        }
-        return false;
-    }
+    
 
     public void ocultarEliminacionEnvio() {
         pnlEliminarEnvio.setVisible(false);
@@ -255,7 +256,9 @@ public class LogisticaVista extends JFrame {
         cmbTipo.setSelectedIndex(0);
     }
 
-
+    public void limpiarCamposEliminar() {
+        txtCodigoEliminar.setText("");
+    }
     // eventos
     private void btnAgregarEnvioClick() {
         pnlEditarEnvio.setVisible(true);
