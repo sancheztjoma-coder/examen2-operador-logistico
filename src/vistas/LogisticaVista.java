@@ -34,7 +34,7 @@ public class LogisticaVista extends JFrame {
         btnAgregarEnvio.setIcon(new ImageIcon(getClass().getResource("/iconos/agregar.png")));
         btnAgregarEnvio.setToolTipText("Agregar Envio");
         btnAgregarEnvio.addActionListener(evt -> {
-            btnAgregarEnvioClick();                                                                                    //////revisar!
+            btnAgregarEnvioClick();                                                                                    
         });
         tbEnvio.add(btnAgregarEnvio);
 
@@ -104,7 +104,7 @@ public class LogisticaVista extends JFrame {
         JButton btnCancelarEnvio = new JButton("Cancelar");
         btnCancelarEnvio.setBounds(320, 70, 100, 25);
         btnCancelarEnvio.addActionListener(evt -> {
-            btnCancelarEnvioClick();                                                               ////revisar !!
+            btnCancelarEnvioClick();                                                               
         });
         pnlEditarEnvio.add(btnCancelarEnvio);
 
@@ -114,13 +114,7 @@ public class LogisticaVista extends JFrame {
         tblEnvios = new JTable();
         JScrollPane spListaEnvios = new JScrollPane(tblEnvios);
 
-        
-        pnlEnvios.add(pnlEditarEnvio);
-        pnlEnvios.add(spListaEnvios);
-
-        
-        JScrollPane spEnvios = new JScrollPane(pnlEnvios);
-        spEnvios.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            
 
         // Contenedor principal de Eliminar
         JPanel pnlEliminar = new JPanel();
@@ -154,15 +148,19 @@ public class LogisticaVista extends JFrame {
         pnlEliminarEnvio.setVisible(false); 
 
         
-        pnlEliminar.add(pnlEliminarEnvio);
+        pnlEnvios.add(pnlEditarEnvio);
+        pnlEnvios.add(pnlEliminarEnvio);
+        pnlEnvios.add(spListaEnvios);
+
         
+        JScrollPane spEnvios = new JScrollPane(pnlEnvios);
+        spEnvios.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);  
 
-        tp = new JTabbedPane();
-        tp.addTab("Envios", spEnvios);
-        tp.addTab("Eliminar", pnlEliminar);
-
+                
         add(tbEnvio, BorderLayout.NORTH);
-        add(tp, BorderLayout.CENTER);
+        add(spEnvios, BorderLayout.CENTER);
+     
+        
     }
 
     // getters
@@ -257,12 +255,13 @@ public class LogisticaVista extends JFrame {
     // eventos
     private void btnAgregarEnvioClick() {
         pnlEditarEnvio.setVisible(true);
-        tp.setSelectedIndex(0);
+        pnlEliminarEnvio.setVisible(false);
         limpiarCampos();
     }
 
     private void btnEliminarBarraClick(){
         pnlEliminarEnvio.setVisible(true);
+        pnlEditarEnvio.setVisible(false);
         
     }
 
