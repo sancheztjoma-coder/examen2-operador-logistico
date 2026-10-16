@@ -268,7 +268,7 @@ public class LogisticaVista extends JFrame {
 
     private void btnEliminarBarraClick(){
         pnlEliminarEnvio.setVisible(true);
-        tp.setSelectedIndex(1);
+        
     }
 
     private void btnCancelarEnvioClick() {

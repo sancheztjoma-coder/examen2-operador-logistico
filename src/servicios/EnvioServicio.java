@@ -51,7 +51,7 @@ public class EnvioServicio {
         if (codigo == null || codigo.isEmpty()) {
             return false;
         }
-        // Remueve el envío si coincide con el código recibido
+        
         return envios.removeIf(e -> e.getCodigo().equalsIgnoreCase(codigo));
     }
 

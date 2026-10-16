@@ -56,7 +56,7 @@ public class LogisticaControlador {
                 vista.limpiarCamposEliminar();
                 vista.mostrarMensaje("Envío eliminado exitosamente.");
             } else {
-                // Cumple con el requisito: "Si el código no existe, informar al usuario"
+                
                 vista.mostrarMensaje("El código del envío no existe.");
             }
         }
