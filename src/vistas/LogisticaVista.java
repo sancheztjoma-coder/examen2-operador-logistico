@@ -208,15 +208,10 @@ public class LogisticaVista extends JFrame {
     }
 
     public void setEliminarEnvioClick(ActionListener escuchadorEvento) {
-        btnEliminar.addActionListener(escuchadorEvento);
-    }
-
-    
-
-    public void setEliminarClick(ActionListener escuchadorEvento) {
         btnEliminarEnvio.addActionListener(escuchadorEvento);
     }
 
+    
 
     public void setAbrirEliminarBarraClick(ActionListener escuchador) {
         btnEliminar.addActionListener(escuchador);
