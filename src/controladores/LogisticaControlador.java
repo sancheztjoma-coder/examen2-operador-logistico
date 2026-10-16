@@ -31,25 +31,34 @@ public class LogisticaControlador {
         var cuentaAgregada = EnvioServicio.agregar(tipo,
                 new DatosEnvio(codigo, cliente, peso, distancia));
         if (cuentaAgregada != null) {
-            vista.setEnvio(cuentaAgregada.toString());
-
-            mostrarEnvios();
-
-            vista.ocultarEdicionEnvio();
+            mostrarEnvios();               
+            vista.ocultarEdicionEnvio();  
+            vista.limpiarCampos();        
+            vista.mostrarMensaje("Envío guardado exitosamente.");
         } else {
-            vista.mostrarMensaje("No se puede agregar el envío");
+            vista.mostrarMensaje("No se pudo agregar el envío.");
         }
     }
 
     private void eliminarEnvio() {
-        if (vista.getFilaEnvioSeleccionado() >= 0) {
-            if (vista.confirmar("¿Está seguro de eliminar el envío?")) {
-                EnvioServicio.eliminar(vista.getFilaEnvioSeleccionado());
-                vista.quitarEnvio(vista.getFilaEnvioSeleccionado());
+        String codigo = vista.getCodigoEliminar();
+        
+        if (codigo.isEmpty()) {
+            vista.mostrarMensaje("Debe ingresar un código de envío para eliminar.");
+            return;
+        }
+
+        if (vista.confirmar("¿Está seguro de eliminar el envío con código " + codigo + "?")) {
+            boolean eliminado = EnvioServicio.eliminarPorCodigo(codigo);
+            if (eliminado) {
                 mostrarEnvios();
+                vista.ocultarEliminacionEnvio();
+                vista.limpiarCamposEliminar();
+                vista.mostrarMensaje("Envío eliminado exitosamente.");
+            } else {
+                
+                vista.mostrarMensaje("El código del envío no existe.");
             }
-        } else {
-            vista.mostrarMensaje("Debe seleccionar un envio para eliminarlo");
         }
     }
 

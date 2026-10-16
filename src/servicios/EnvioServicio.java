@@ -47,12 +47,12 @@ public class EnvioServicio {
         return datos;
     }
 
-    public static boolean eliminar(int posicion) {
-        if (posicion >= 0 && posicion < envios.size()) {
-            envios.remove(posicion);
-            return true;
+    public static boolean eliminarPorCodigo(String codigo) {
+        if (codigo == null || codigo.isEmpty()) {
+            return false;
         }
-        return false;
+        
+        return envios.removeIf(e -> e.getCodigo().equalsIgnoreCase(codigo));
     }
 
 }
