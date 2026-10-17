@@ -27,6 +27,15 @@ public class LogisticaControlador {
         var peso = vista.getPeso();
         var distancia = vista.getDistancia();
 
+        if (codigo.isEmpty() || cliente.isEmpty() || peso <= 0 || distancia <= 0) {
+            vista.mostrarMensaje("Todos los campos son obligatorios y deben ser válidos.");
+            return;
+        }
+
+        if (EnvioServicio.existeCodigo(codigo)) {
+            vista.mostrarMensaje("El código '" + codigo + "' ya existe. Debe ser un código único.");
+            return;
+        }
 
         var cuentaAgregada = EnvioServicio.agregar(tipo,
                 new DatosEnvio(codigo, cliente, peso, distancia));

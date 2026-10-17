@@ -47,6 +47,22 @@ public class EnvioServicio {
         return datos;
     }
 
+
+    public static boolean existeCodigo(String codigo) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            return false;
+        }
+        
+        
+        for (Envio e : envios) {
+            if (e.getCodigo().equalsIgnoreCase(codigo.trim())) {
+                return true; 
+            }
+        }
+        
+        return false; 
+    }
+
     public static boolean eliminarPorCodigo(String codigo) {
         if (codigo == null || codigo.isEmpty()) {
             return false;
