@@ -192,10 +192,7 @@ public class LogisticaVista extends JFrame {
         return (TipoTransporte) cmbTipo.getSelectedItem();
     }
 
-    public int getFilaEnvioSeleccionado() {
-        return tblEnvios.getSelectedRow();
-    }
-
+    
     public String getCodigoEliminar() {
         return txtCodigoEliminar.getText().trim();
     }
