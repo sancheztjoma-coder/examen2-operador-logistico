@@ -197,6 +197,7 @@ public class LogisticaVista extends JFrame {
         return txtCodigoEliminar.getText().trim();
     }
     
+    
     // setters
     public void setGuardarEnvioClick(ActionListener escuchadorEvento) {
         btnGuardarEnvio.addActionListener(escuchadorEvento);
